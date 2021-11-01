@@ -35,6 +35,21 @@ const app = () => {
       play.src = './svg/play.svg';
     }
   };
+
+  // We can animated the circle
+  song.ontimeupdate = () => {
+    let currentTime = song.currentTime;
+    let elapsed = fakeDuration - currentTime;
+    let seconds = Math.floor(elapsed % 60);
+    let minutes = Math.floor(elapsed / 60);
+
+    // Animate the circle
+    let progress = outlineLength - (currentTime / fakeDuration) * outlineLength;
+    outline.style.strokeDashoffset = progress;
+
+    // Animate the text
+    timeDisplay.textContent = `${minutes}:${seconds}`;
+  };
 };
 
 app();
